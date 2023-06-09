@@ -8,7 +8,9 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        NavigationStore navigationStore = new NavigationStore();
+        NavigationStore navigationStore = new();
+
+        navigationStore.CurrentViewModel = new AccountViewModel(navigationStore);
 
         MainWindow = new MainWindow()
         {
@@ -18,5 +20,4 @@ public partial class App : Application
 
         base.OnStartup(e);
     }
-
 }
