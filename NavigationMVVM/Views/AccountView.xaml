@@ -27,7 +27,7 @@
         <TextBlock
             Grid.Row="1"
             Margin="0,20,0,0"
-            Text="{Binding WelcomMessage}" />
+            Text="{Binding Name}" />
 
         <Button
             Grid.Row="3"
