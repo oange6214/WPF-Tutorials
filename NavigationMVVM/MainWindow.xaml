@@ -12,7 +12,6 @@
     Height="450"
     mc:Ignorable="d">
 
-
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type viewmodels:AccountViewModel}">
@@ -20,6 +19,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                <views:LoginView />
             </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>

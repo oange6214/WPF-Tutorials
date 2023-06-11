@@ -10,7 +10,7 @@ public partial class App : Application
     {
         NavigationStore navigationStore = new();
 
-        navigationStore.CurrentViewModel = new AccountViewModel(navigationStore);
+        navigationStore.CurrentViewModel = new HomeViewModel(navigationStore);
 
         MainWindow = new MainWindow()
         {

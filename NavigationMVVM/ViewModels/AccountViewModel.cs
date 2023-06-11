@@ -12,6 +12,8 @@ public class AccountViewModel : ViewModelBase
 
     public AccountViewModel(NavigationStore navigationStore)
     {
-        NavigateHomeCommand = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
+        NavigateHomeCommand = new NavigateCommand<HomeViewModel>(new Services.NavigationService<HomeViewModel>(
+            navigationStore, () => new HomeViewModel(navigationStore)));
     }
 }
+ 

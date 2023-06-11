@@ -8,10 +8,11 @@ public class HomeViewModel : ViewModelBase
 {
     public string WelcomeMessage => "Welcome to my app";
 
-    public ICommand NavigateAccountCommand { get; }
+    public ICommand NavigateLoginCommand { get; }
 
     public HomeViewModel(NavigationStore navigationStore)
     {
-        NavigateAccountCommand = new NavigateCommand<LoginViewModel>(navigationStore, () => new LoginViewModel(navigationStore));
+        NavigateLoginCommand = new NavigateCommand<LoginViewModel>(new Services.NavigationService<LoginViewModel>(
+            navigationStore, () => new LoginViewModel(navigationStore)));
     }
 }

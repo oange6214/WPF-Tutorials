@@ -1,4 +1,4 @@
-﻿using NavigationMVVM.Stores;
+﻿using NavigationMVVM.Services;
 using NavigationMVVM.ViewModels;
 using System.Windows;
 
@@ -7,19 +7,18 @@ namespace NavigationMVVM.Commands;
 public class LoginCommand : CommandBase
 {
     private readonly LoginViewModel _viewModel;
-    private readonly NavigationStore _navigationStore;
+    private readonly NavigationService<AccountViewModel> _navigationService;
 
-    public LoginCommand(LoginViewModel viewModel, NavigationStore navigationStore)
+    public LoginCommand(LoginViewModel viewModel, NavigationService<AccountViewModel> navigationService)
     {
         _viewModel = viewModel;
-        _navigationStore = navigationStore;
+        _navigationService = navigationService;
     }
 
     public override void Execute(object? parameter)
     {
         MessageBox.Show($"Logging in {_viewModel.Username}");
 
-        // Navigate to the account page.
-        _navigationStore.CurrentViewModel = new AccountViewModel(_navigationStore);
+        _navigationService.Navigate();
     }
 }
