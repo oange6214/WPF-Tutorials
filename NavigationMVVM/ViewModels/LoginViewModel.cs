@@ -37,8 +37,7 @@ public class LoginViewModel : ViewModelBase
 
     public LoginViewModel(NavigationStore navigationStore)
     {
-        LoginCommand = new LoginCommand(this, new NavigationService<AccountViewModel>(
-            navigationStore, () => new AccountViewModel(navigationStore)));
+        LoginCommand = new LoginCommand(this, navigationStore);
     }
 
 }
