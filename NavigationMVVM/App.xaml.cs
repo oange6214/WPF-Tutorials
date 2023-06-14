@@ -9,8 +9,9 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         NavigationStore navigationStore = new();
+        AccountStore accountStore = new();
 
-        navigationStore.CurrentViewModel = new HomeViewModel(navigationStore);
+        navigationStore.CurrentViewModel = new HomeViewModel(accountStore, navigationStore);
 
         MainWindow = new MainWindow()
         {
