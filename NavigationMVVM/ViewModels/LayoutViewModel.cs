@@ -1,6 +1,6 @@
 ﻿namespace NavigationMVVM.ViewModels;
 
-public class LayoutViewModel
+public class LayoutViewModel : ViewModelBase
 {
 
     public NavigationBarViewModel NavigationBarViewModel { get; }
