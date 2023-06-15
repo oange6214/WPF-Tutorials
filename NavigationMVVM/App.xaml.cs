@@ -17,8 +17,8 @@ public partial class App : Application
         _accountStore = new AccountStore();
         _navigationBarViewModel = new NavigationBarViewModel(
             _accountStore,
-            CreateHomeNavigationService(), 
-            CreateAccountNavigationService(), 
+            CreateHomeNavigationService(),
+            CreateAccountNavigationService(),
             CreateLoginNavigationService()
             );
     }
@@ -39,21 +39,28 @@ public partial class App : Application
 
     private INavigationService<HomeViewModel> CreateHomeNavigationService()
     {
-        return new NavigationService<HomeViewModel>(
+        return new LayoutNavigationService<HomeViewModel>(
             _navigationStore, 
-            () => new HomeViewModel(CreateLoginNavigationService()));
+            () => new HomeViewModel(CreateLoginNavigationService()),
+            CreateNavigationBarViewModel);
     }
     private INavigationService<LoginViewModel> CreateLoginNavigationService()
     {
         return new NavigationService<LoginViewModel>(
             _navigationStore, 
-            () => new LoginViewModel(CreateAccountNavigationService()));
+            () => new LoginViewModel(_accountStore, CreateAccountNavigationService()));
     }
 
     private INavigationService<AccountViewModel> CreateAccountNavigationService()
     {
-        return new NavigationService<AccountViewModel>(
+        return new LayoutNavigationService<AccountViewModel>(
             _navigationStore, 
-            () => new AccountViewModel(CreateHomeNavigationService()));
+            () => new AccountViewModel(_accountStore, CreateHomeNavigationService()),
+            CreateNavigationBarViewModel);
+    }
+
+    private NavigationBarViewModel CreateNavigationBarViewModel()
+    {
+        return _navigationBarViewModel;
     }
 }
