@@ -2,39 +2,38 @@
 using NavigationMVVM.ValidationRules;
 using System;
 
-namespace NavigationMVVM.ViewModels
+namespace NavigationMVVM.ViewModels;
+
+public class MainViewModel : ViewModelBase
 {
-    public class MainViewModel : ViewModelBase
+    private readonly NavigationStore _navigationStore;
+
+    public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+
+    public MainViewModel(NavigationStore navigationStore)
     {
-        private readonly NavigationStore _navigationStore;
+        _navigationStore = navigationStore;
+        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged; 
+    }
 
-        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+    private void OnCurrentViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentViewModel));
+    }
 
-        public MainViewModel(NavigationStore navigationStore)
+    private string _myProperty;
+
+    public string MyProperty
+    {
+        get => _myProperty;
+        set
         {
-            _navigationStore = navigationStore;
-            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged; 
-        }
-
-        private void OnCurrentViewModelChanged()
-        {
-            OnPropertyChanged(nameof(CurrentViewModel));
-        }
-
-        private string _myProperty;
-
-        public string MyProperty
-        {
-            get => _myProperty;
-            set
+            if (_myProperty != value)
             {
-                if (_myProperty != value)
-                {
-                    _myProperty = value;
-                    this.ValidateProperty(() =>
-                    MyProperty, new NotEmptyValidationRule());
-                    OnPropertyChanged();
-                }
+                _myProperty = value;
+                this.ValidateProperty(() =>
+                MyProperty, new NotEmptyValidationRule());
+                OnPropertyChanged();
             }
         }
     }
