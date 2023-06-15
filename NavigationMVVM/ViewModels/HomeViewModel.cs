@@ -10,7 +10,7 @@ public class HomeViewModel : ViewModelBase
 
     public ICommand NavigateLoginCommand { get; }
 
-    public HomeViewModel(NavigationService<LoginViewModel> loginNavigationService)
+    public HomeViewModel(INavigationService<LoginViewModel> loginNavigationService)
     {
         NavigateLoginCommand = new NavigateCommand<LoginViewModel>(loginNavigationService);
     }

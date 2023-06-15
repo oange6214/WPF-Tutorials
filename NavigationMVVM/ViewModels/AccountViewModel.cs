@@ -15,7 +15,7 @@ public class AccountViewModel : ViewModelBase
 
     public ICommand NavigateHomeCommand { get; }
 
-    public AccountViewModel(AccountStore accountStore, NavigationService<HomeViewModel> homeNavigationService)
+    public AccountViewModel(AccountStore accountStore, INavigationService<HomeViewModel> homeNavigationService)
     {
         _accountStore = accountStore;
 

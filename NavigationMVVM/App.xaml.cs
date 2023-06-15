@@ -25,7 +25,7 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        NavigationService<HomeViewModel> navigationService = CreateHomeNavigationService();
+        INavigationService<HomeViewModel> navigationService = CreateHomeNavigationService();
         navigationService.Navigate();
 
         MainWindow = new MainWindow()
@@ -37,29 +37,23 @@ public partial class App : Application
         base.OnStartup(e);
     }
 
-    private NavigationService<LayoutViewModel> CreateHomeNavigationService()
+    private INavigationService<HomeViewModel> CreateHomeNavigationService()
     {
-        return new NavigationService<LayoutViewModel>(
+        return new NavigationService<HomeViewModel>(
             _navigationStore, 
-            () => new LayoutViewModel(
-                _navigationBarViewModel,
-                CreateLoginNavigationService()));
+            () => new HomeViewModel(CreateLoginNavigationService()));
     }
-    private NavigationService<LoginViewModel> CreateLoginNavigationService()
+    private INavigationService<LoginViewModel> CreateLoginNavigationService()
     {
         return new NavigationService<LoginViewModel>(
             _navigationStore, 
-            () => new LoginViewModel(
-                _accountStore,
-                CreateAccountNavigationService()));
+            () => new LoginViewModel(CreateAccountNavigationService()));
     }
 
-    private NavigationService<AccountViewModel> CreateAccountNavigationService()
+    private INavigationService<AccountViewModel> CreateAccountNavigationService()
     {
         return new NavigationService<AccountViewModel>(
             _navigationStore, 
-            () => new AccountViewModel(
-                _accountStore,
-                CreateHomeNavigationService()));
+            () => new AccountViewModel(CreateHomeNavigationService()));
     }
 }

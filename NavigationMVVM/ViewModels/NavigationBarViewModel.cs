@@ -17,9 +17,9 @@ public class NavigationBarViewModel : ViewModelBase
 
     public NavigationBarViewModel(
         AccountStore accountStore,
-        NavigationService<HomeViewModel> homeNavigationService, 
-        NavigationService<AccountViewModel> accountNavigationService, 
-        NavigationService<LoginViewModel> loginNavigationService)
+        INavigationService<HomeViewModel> homeNavigationService,
+        INavigationService<AccountViewModel> accountNavigationService,
+        INavigationService<LoginViewModel> loginNavigationService)
     {
         NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
         NavigateAccountCommand = new NavigateCommand<AccountViewModel>(accountNavigationService);
