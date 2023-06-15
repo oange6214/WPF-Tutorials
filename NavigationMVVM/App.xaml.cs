@@ -9,6 +9,7 @@ public partial class App : Application
 {
     private readonly AccountStore _accountStore;
     private readonly NavigationStore _navigationStore;
+    private readonly NavigationBarViewModel _navigationBarViewModel;
 
     public App()
     {
@@ -36,11 +37,12 @@ public partial class App : Application
         base.OnStartup(e);
     }
 
-    private NavigationService<HomeViewModel> CreateHomeNavigationService()
+    private NavigationService<LayoutViewModel> CreateHomeNavigationService()
     {
-        return new NavigationService<HomeViewModel>(
+        return new NavigationService<LayoutViewModel>(
             _navigationStore, 
-            () => new HomeViewModel(
+            () => new LayoutViewModel(
+                _navigationBarViewModel,
                 CreateLoginNavigationService()));
     }
     private NavigationService<LoginViewModel> CreateLoginNavigationService()

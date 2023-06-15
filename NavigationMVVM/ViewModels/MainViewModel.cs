@@ -1,6 +1,5 @@
 ﻿using NavigationMVVM.Stores;
 using NavigationMVVM.ValidationRules;
-using System;
 
 namespace NavigationMVVM.ViewModels;
 
