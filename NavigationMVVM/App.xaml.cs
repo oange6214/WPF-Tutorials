@@ -1,7 +1,6 @@
 ﻿using NavigationMVVM.Services;
 using NavigationMVVM.Stores;
 using NavigationMVVM.ViewModels;
-using System;
 using System.Windows;
 
 namespace NavigationMVVM;
@@ -10,7 +9,6 @@ public partial class App : Application
 {
     private readonly AccountStore _accountStore;
     private readonly NavigationStore _navigationStore;
-    private readonly NavigationBarViewModel _navigationBarViewModel;
 
     public App()
     {
@@ -43,7 +41,6 @@ public partial class App : Application
         return new NavigationService<HomeViewModel>(
             _navigationStore, 
             () => new HomeViewModel(
-                _navigationBarViewModel,
                 CreateLoginNavigationService()));
     }
     private NavigationService<LoginViewModel> CreateLoginNavigationService()
@@ -60,7 +57,6 @@ public partial class App : Application
         return new NavigationService<AccountViewModel>(
             _navigationStore, 
             () => new AccountViewModel(
-                _navigationBarViewModel,
                 _accountStore,
                 CreateHomeNavigationService()));
     }
