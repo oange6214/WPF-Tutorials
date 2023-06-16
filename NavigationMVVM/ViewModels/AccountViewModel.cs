@@ -10,7 +10,6 @@ public class AccountViewModel : ViewModelBase
     private AccountStore _accountStore;
 
     public string Username => _accountStore.CurrentAccount?.Username;
-
     public string Email => _accountStore.CurrentAccount?.Email;
 
     public ICommand NavigateHomeCommand { get; }
@@ -18,8 +17,15 @@ public class AccountViewModel : ViewModelBase
     public AccountViewModel(AccountStore accountStore, INavigationService<HomeViewModel> homeNavigationService)
     {
         _accountStore = accountStore;
+        _accountStore.CurrentAccountChanged += OnCurrentAccountChanged;
 
         NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
+    }
+
+    private void OnCurrentAccountChanged()
+    {
+        OnPropertyChanged(nameof(Username));
+        OnPropertyChanged(nameof(Email));
     }
 }
  

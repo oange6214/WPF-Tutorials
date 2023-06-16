@@ -29,9 +29,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <TextBlock
-                                    Text="{TemplateBinding Content}"
-                                    TextDecorations="Underline" />
+                                <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -43,19 +41,16 @@
 
     </UserControl.Resources>
 
-    <Grid
-        MaxWidth="1000"
-        Margin="20,10">
+    <Grid MaxWidth="1000" Margin="20,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock
-            Grid.Column="0"
-            Text="Navigation Demo" />
+        <TextBlock Grid.Column="0" Text="Navigation Demo" />
         <Button
             Grid.Column="1"
             Margin="10,0,0,0"
@@ -71,6 +66,12 @@
             Margin="10,0,0,0"
             Command="{Binding NavigateAccountCommand}"
             Content="Account"
+            Visibility="{Binding IsLoggedIn, Converter={StaticResource boolToVisibility}}" />
+        <Button
+            Grid.Column="4"
+            Margin="10,0,0,0"
+            Command="{Binding LogoutCommand}"
+            Content="Logout"
             Visibility="{Binding IsLoggedIn, Converter={StaticResource boolToVisibility}}" />
     </Grid>
 </UserControl>
