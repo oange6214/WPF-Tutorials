@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace NavigationMVVM.ViewModels;
 
-public class ViewModelBase : INotifyPropertyChanged, IDataErrorInfo
+public class ViewModelBase : INotifyPropertyChanged, IDataErrorInfo, IDisposable
 {
     public event PropertyChangedEventHandler PropertyChanged;
 
