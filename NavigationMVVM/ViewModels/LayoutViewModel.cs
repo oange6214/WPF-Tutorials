@@ -12,4 +12,11 @@ public class LayoutViewModel : ViewModelBase
         ContentViewModel = contentViewModel;
     }
 
+    public override void Dispose()
+    {
+        NavigationBarViewModel.Dispose();
+        ContentViewModel.Dispose();
+        base.Dispose();
+    }
+
 }

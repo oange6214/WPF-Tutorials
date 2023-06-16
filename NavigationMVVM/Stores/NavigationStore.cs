@@ -15,6 +15,7 @@ public class NavigationStore
 
         set 
 		{
+			_currentViewModel?.Dispose();
 			_currentViewModel = value;
 			OnCurrentViewModelChanged();
 		}

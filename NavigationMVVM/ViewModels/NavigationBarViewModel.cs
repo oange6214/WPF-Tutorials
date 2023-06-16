@@ -1,6 +1,7 @@
 ﻿using NavigationMVVM.Commands;
 using NavigationMVVM.Services;
 using NavigationMVVM.Stores;
+using System;
 using System.Windows.Input;
 
 namespace NavigationMVVM.ViewModels;
@@ -27,6 +28,19 @@ public class NavigationBarViewModel : ViewModelBase
         NavigateAccountCommand = new NavigateCommand<AccountViewModel>(accountNavigationService);
         NavigateLoginCommand = new NavigateCommand<LoginViewModel>(loginNavigationService);
         LogoutCommand = new LogoutCommand(_accountStore);
+
+        _accountStore.CurrentAccountChanged += OnCurrentAccountChanged;
+    }
+
+    private void OnCurrentAccountChanged()
+    {
+        OnPropertyChanged(nameof(IsLoggedIn));
+    }
+
+    public override void Dispose()
+    {
+        _accountStore.CurrentAccountChanged -= OnCurrentAccountChanged;
+        base.Dispose();
     }
 
 }

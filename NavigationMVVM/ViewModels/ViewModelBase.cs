@@ -57,4 +57,5 @@ public class ViewModelBase : INotifyPropertyChanged, IDataErrorInfo
         throw new ArgumentException("Property selector must be a member expression", nameof(propertySelector));
     }
 
+    public virtual void Dispose() { }
 }

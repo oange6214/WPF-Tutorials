@@ -27,5 +27,11 @@ public class AccountViewModel : ViewModelBase
         OnPropertyChanged(nameof(Username));
         OnPropertyChanged(nameof(Email));
     }
+
+    public override void Dispose()
+    {
+        _accountStore.CurrentAccountChanged -= OnCurrentAccountChanged;
+        base.Dispose();
+    }
 }
  

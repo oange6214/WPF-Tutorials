@@ -9,18 +9,11 @@ public partial class App : Application
 {
     private readonly AccountStore _accountStore;
     private readonly NavigationStore _navigationStore;
-    private readonly NavigationBarViewModel _navigationBarViewModel;
 
     public App()
     {
         _navigationStore = new NavigationStore();
         _accountStore = new AccountStore();
-        _navigationBarViewModel = new NavigationBarViewModel(
-            _accountStore,
-            CreateHomeNavigationService(),
-            CreateAccountNavigationService(),
-            CreateLoginNavigationService()
-            );
     }
 
     protected override void OnStartup(StartupEventArgs e)
@@ -61,6 +54,11 @@ public partial class App : Application
 
     private NavigationBarViewModel CreateNavigationBarViewModel()
     {
-        return _navigationBarViewModel;
+        return new NavigationBarViewModel(
+            _accountStore,
+            CreateHomeNavigationService(),
+            CreateAccountNavigationService(),
+            CreateLoginNavigationService()
+            );
     }
 }
