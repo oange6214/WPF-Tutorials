@@ -1,6 +1,8 @@
 ﻿using NavigationMVVM.Services;
 using NavigationMVVM.Stores;
 using NavigationMVVM.ViewModels;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace NavigationMVVM;
@@ -39,11 +41,17 @@ public partial class App : Application
             () => new HomeViewModel(CreateLoginNavigationService()),
             CreateNavigationBarViewModel);
     }
+
     private INavigationService CreateLoginNavigationService()
     {
+        CompositeNavigationService compositeNavigationService = new (
+                new CloseModalNavigationService(_modalNavigationStore),
+                CreateAccountNavigationService()
+            );
+
         return new ModalNavigationService<LoginViewModel>(
             _modalNavigationStore, 
-            () => new LoginViewModel(_accountStore, new CloseModalNavigationService(_modalNavigationStore)));
+            () => new LoginViewModel(_accountStore, compositeNavigationService ));
     }
 
     private INavigationService CreateAccountNavigationService()
