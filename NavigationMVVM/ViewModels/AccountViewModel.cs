@@ -9,17 +9,17 @@ public class AccountViewModel : ViewModelBase
 {
     private AccountStore _accountStore;
 
-    public string Username => _accountStore.CurrentAccount?.Username;
-    public string Email => _accountStore.CurrentAccount?.Email;
+    public string? Username => _accountStore.CurrentAccount?.Username;
+    public string? Email => _accountStore.CurrentAccount?.Email;
 
     public ICommand NavigateHomeCommand { get; }
 
-    public AccountViewModel(AccountStore accountStore, INavigationService<HomeViewModel> homeNavigationService)
+    public AccountViewModel(AccountStore accountStore, INavigationService homeNavigationService)
     {
         _accountStore = accountStore;
         _accountStore.CurrentAccountChanged += OnCurrentAccountChanged;
 
-        NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
+        NavigateHomeCommand = new NavigateCommand(homeNavigationService);
     }
 
     private void OnCurrentAccountChanged()

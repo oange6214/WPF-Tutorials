@@ -9,12 +9,12 @@ public class LoginCommand : CommandBase
 {
     private readonly LoginViewModel _viewModel;
     private readonly AccountStore _accountStore;
-    private readonly INavigationService<AccountViewModel> _navigationService;
+    private readonly INavigationService _navigationService;
 
     public LoginCommand(
         LoginViewModel viewModel, 
         AccountStore accountStore,
-        INavigationService<AccountViewModel> navigationService)
+        INavigationService navigationService)
     {
         _viewModel = viewModel;
         _accountStore = accountStore;

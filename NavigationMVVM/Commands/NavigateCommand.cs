@@ -1,14 +1,12 @@
 ﻿using NavigationMVVM.Services;
-using NavigationMVVM.ViewModels;
 
 namespace NavigationMVVM.Commands;
 
-public class NavigateCommand<TViewModel> : CommandBase
-    where TViewModel : ViewModelBase
+public class NavigateCommand : CommandBase
 {
-    private readonly INavigationService<TViewModel> _navigateService;
+    private readonly INavigationService _navigateService;
 
-    public NavigateCommand(INavigationService<TViewModel> navigateService)
+    public NavigateCommand(INavigationService navigateService)
     {
         _navigateService = navigateService;
     }

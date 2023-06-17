@@ -5,11 +5,11 @@ namespace NavigationMVVM.Stores;
 
 public class NavigationStore
 {
-    public event Action CurrentViewModelChanged;
+    public event Action? CurrentViewModelChanged;
 
-	private ViewModelBase _currentViewModel;
+	private ViewModelBase? _currentViewModel;
 
-	public ViewModelBase CurrentViewModel
+	public ViewModelBase? CurrentViewModel
 	{
 		get => _currentViewModel;
 

@@ -5,9 +5,9 @@ namespace NavigationMVVM.Stores;
 
 public class AccountStore
 {
-	private Account _currentAccount;
+	private Account? _currentAccount;
 
-	public Account CurrentAccount
+	public Account? CurrentAccount
 	{
 		get => _currentAccount;
         set 
@@ -19,10 +19,10 @@ public class AccountStore
 
 	public bool IsLoggedIn => CurrentAccount != null;
 
-	public event Action CurrentAccountChanged;
+	public event Action? CurrentAccountChanged;
 
     internal void Logout()
     {
-		CurrentAccount = null;
+        CurrentAccount = null;
     }
 }

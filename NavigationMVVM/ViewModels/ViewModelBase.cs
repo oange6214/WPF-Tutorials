@@ -9,10 +9,10 @@ namespace NavigationMVVM.ViewModels;
 
 public class ViewModelBase : INotifyPropertyChanged, IDataErrorInfo, IDisposable
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     // Property Change Notification
-    protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
+    protected virtual void OnPropertyChanged([CallerMemberName]string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
@@ -20,7 +20,7 @@ public class ViewModelBase : INotifyPropertyChanged, IDataErrorInfo, IDisposable
     // For property validation
     protected Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
 
-    public string Error => null;
+    public string? Error => null;
 
     public string this[string columnName] => _errors.ContainsKey(columnName) ? string.Join(Environment.NewLine, _errors[columnName]) : null;
 
