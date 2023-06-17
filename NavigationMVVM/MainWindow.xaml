@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:NavigationMVVM"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
     xmlns:viewmodels="clr-namespace:NavigationMVVM.ViewModels"
     xmlns:views="clr-namespace:NavigationMVVM.Views"
     Title="MainWindow"
@@ -13,20 +14,26 @@
     Height="450"
     mc:Ignorable="d">
 
-    <ContentControl Content="{Binding CurrentViewModel}">
-        <ContentControl.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:AccountViewModel}">
-                <views:AccountView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-                <views:HomeView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                <views:LoginView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
-                <components:Layout />
-            </DataTemplate>
-        </ContentControl.Resources>
-    </ContentControl>
+    <Grid>
+        <modalcontrol:Modal Panel.ZIndex="100" IsOpen="True">
+            <views:LoginView />
+        </modalcontrol:Modal>
+
+        <ContentControl Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:AccountViewModel}">
+                    <views:AccountView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                    <views:HomeView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                    <views:LoginView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
+                    <components:Layout />
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
 </Window>
