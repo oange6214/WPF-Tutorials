@@ -29,6 +29,7 @@ public partial class App : Application
             _serviceProvider.GetRequiredService<AccountStore>(),
             CreateHomeNavigationService(p)));
         services.AddTransient<LoginViewModel>(CreateLoginViewModel);
+        services.AddTransient<PeopleListingViewModel>(p => new PeopleListingViewModel());
         services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
         services.AddSingleton<MainViewModel>();
 
@@ -86,13 +87,23 @@ public partial class App : Application
             () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
     }
 
+    private INavigationService CreatePeopleListingNavigationService(IServiceProvider serviceProvider)
+    {
+        return new LayoutNavigationService<PeopleListingViewModel>(
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<PeopleListingViewModel>(),
+            () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+    }
+
     private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
     {
         return new NavigationBarViewModel(
             serviceProvider.GetRequiredService<AccountStore>(),
             CreateHomeNavigationService(serviceProvider),
             CreateAccountNavigationService(serviceProvider),
-            CreateLoginNavigationService(serviceProvider)
+            CreateLoginNavigationService(serviceProvider),
+            CreatePeopleListingNavigationService(serviceProvider)
             );
     }
+
 }
