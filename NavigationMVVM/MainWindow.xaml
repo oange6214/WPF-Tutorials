@@ -29,6 +29,9 @@
             <DataTemplate DataType="{x:Type vm:PeopleListingViewModel}">
                 <views:PeopleListingView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AddPersonViewModel}">
+                <views:AddPersonView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
                 <components:Layout />
             </DataTemplate>

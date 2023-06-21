@@ -24,6 +24,12 @@
                 FontSize="28"
                 Text="People" />
 
+            <Button
+                Margin="10,0,0,0"
+                Padding="5,3"
+                Command="{Binding AddPersonCommand}"
+                Content=" Add Person" />
+
         </StackPanel>
 
         <ListView
