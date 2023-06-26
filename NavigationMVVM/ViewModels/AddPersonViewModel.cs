@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using NavigationMVVM.Commands;
+using NavigationMVVM.Services;
+using NavigationMVVM.Stores;
+using System.Windows.Input;
 
 namespace NavigationMVVM.ViewModels;
 
@@ -22,9 +25,9 @@ public class AddPersonViewModel : ViewModelBase
 	public ICommand SubmitCommand { get; }
 	public ICommand CancelCommand { get; }
 
-    public AddPersonViewModel()
+    public AddPersonViewModel(PeopleStore peopleStore, INavigationService closeNavigationService)
     {
-        
+		SubmitCommand = new AddPersonCommand(this, peopleStore, closeNavigationService);
+		CancelCommand = new NavigateCommand(closeNavigationService);
     }
-
 }

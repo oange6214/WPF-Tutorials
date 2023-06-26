@@ -16,6 +16,7 @@ public partial class App : Application
         IServiceCollection services = new ServiceCollection();
 
         services.AddSingleton<AccountStore>();
+        services.AddSingleton<PeopleStore>();
         services.AddSingleton<NavigationStore>();
         services.AddSingleton<ModalNavigationStore>();
 
@@ -29,8 +30,13 @@ public partial class App : Application
             _serviceProvider.GetRequiredService<AccountStore>(),
             CreateHomeNavigationService(p)));
         services.AddTransient<LoginViewModel>(CreateLoginViewModel);
-        services.AddTransient<PeopleListingViewModel>(p => new PeopleListingViewModel(CreateAddPersonNavigationService(p)));
-        services.AddTransient<AddPersonViewModel>(p => new AddPersonViewModel());
+        services.AddTransient<PeopleListingViewModel>(p => new PeopleListingViewModel(
+            p.GetRequiredService<PeopleStore>(),
+            CreateAddPersonNavigationService(p)));
+        services.AddTransient<AddPersonViewModel>(p => new AddPersonViewModel(
+            p.GetRequiredService<PeopleStore>(),
+            p.GetRequiredService<CloseModalNavigationService>()
+            ));
         services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
         services.AddSingleton<MainViewModel>();
 
